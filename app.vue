@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <div class="min-h-screen bg-slate-100 flex items-center justify-center">
-    <h1 class="text-3xl font-bold text-blue-600">Init</h1>
-  </div>
-    <!-- <NuxtRouteAnnouncer />
-    <NuxtWelcome /> -->
+  <div class="layout">
+    <NuxtPage />
   </div>
 </template>
+
+<style scoped>
+.layout {
+  min-height: 100vh;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  display: flex;
+  flex-direction: column;
+}
+</style>
