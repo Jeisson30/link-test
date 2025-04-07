@@ -1,6 +1,6 @@
 <template>
 	<div class="PostNews">
-		<h1 class="title">Lista de Posts</h1>
+		<h1>Lista de Posts</h1>
 
 		<div v-if="isLoading">Cargando...</div>
 		<div v-if="error">{{ error }}</div>
@@ -13,8 +13,9 @@
 </template>
   
 <script setup lang="ts">
-	import PostCard from '~/components/PostCard.vue'
-	import { usePosts } from '@/composables/usePosts'
+	import PostCard from '../components/PostCard.vue'
+	import { usePosts } from '../composables/usePosts'
+	import { onMounted } from 'vue'
 
 	const { posts, isLoading, error, fetchPosts } = usePosts()
 	onMounted(fetchPosts)
@@ -28,7 +29,7 @@
 	.PostNews h1 {
 		font-size: 2rem;
 		margin-bottom: 2rem;
-		color: #1e3a8a;
+		color: #fff;
 		text-align: center;
 	}
 
@@ -38,9 +39,5 @@
 		gap: 2rem;
 		padding: 1rem;
 	}
-	.title {
-		color: antiquewhite;
-	}
-
 </style>
   

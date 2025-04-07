@@ -1,4 +1,6 @@
 import type { Post } from '@/types/Post'
+import { ref } from 'vue'
+
 
 export const usePosts = () => {
   const posts = ref<Post[]>([])
