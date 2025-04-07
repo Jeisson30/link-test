@@ -1,75 +1,136 @@
-# Nuxt Minimal Starter
+# 📰 Vue Nuxt Blog - Prueba Técnica Mid-Level
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Este es un proyecto desarrollado con **Vue 3**, **Nuxt 3** y **TypeScript** que consume la API pública de JSONPlaceholder para listar y visualizar detalles de publicaciones (`posts`). El enfoque está en buenas prácticas, estructura clara, separación de responsabilidades y pruebas unitarias.
 
-## Setup
+EL proyecto consta de consulta de api que simulas post, realiza el llamado y el usuario puede sleeccionar cualquiera y ver en otra interfaz el post seleccionado.
 
-Make sure to install dependencies:
+## 📋 Características del proyecto
+
+- Framework: [Nuxt 3](https://nuxt.com/)
+- Lenguaje: TypeScript
+- Estilos: CSS tradicional (sin Tailwind)
+- Consumo de API: [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts)
+- Pruebas: [Vitest](https://vitest.dev/) + [@testing-library/vue](https://testing-library.com/docs/vue-testing-library/intro/)
+- Arquitectura limpia: separación de `pages`, `components`, `composables`, `types`, y `tests`.
+
+---
+
+## 🚀 Instalación y configuración
+
+### 1. Clonar el repositorio
 
 ```bash
-# npm
+git clone -b main https://github.com/Jeisson30/link-test.git
+```
+
+### 2. Instalar dependencias
+
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+### 3. Ejecutar el servidor de desarrollo
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+La aplicación estará disponible en: https://link-test-rho.vercel.app/PostNews
 
-Build the application for production:
+---
+
+## 📁 Estructura del proyecto
+
+```
+.
+├── components/        # Componentes reutilizables
+│   └── PostCard.vue
+├── composables/       # Lógica reutilizable
+│   ├── usePosts.ts    # Listado de posts
+│   └── usePost.ts     # Detalle de un post
+├── pages/
+│   ├── index.vue      # Página principal (listado)
+│   └── posts/
+│       └── [id].vue   # Página de detalle  
+├── types/
+│   └── Post.ts        # Tipados
+├── vitest.config.ts   # Configuración de Vitest
+└── README.md
+```
+
+---
+
+## 🧪 Pruebas unitarias
+
+### 1. Ejecutar pruebas
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+npm run test
 ```
 
-Locally preview production build:
+### 2. Estructura de pruebas
 
-```bash
-# npm
-npm run preview
+| Archivo | Prueba |
+|--------|--------|
+| `PostCard.spec.ts` | Valida que se renderice el título y contenido del post |
+| `usePosts.spec.ts` | Simula el fetch de todos los posts |
+| `usePost.spec.ts` | Simula el fetch de un post individual por ID |
+| `[id].spec.ts` | Verifica que la vista de detalle funcione correctamente |
 
-# pnpm
-pnpm preview
+### 3. Ejemplo de prueba con Vitest
 
-# yarn
-yarn preview
+```ts
+import { render } from '@testing-library/vue'
+import PostCard from '@/components/PostCard.vue'
+import { describe, it, expect } from 'vitest'
 
-# bun
-bun run preview
+const mockPost = {
+  id: 1,
+  userId: 1,
+  title: 'Post de prueba',
+  body: 'Contenido simulado del post.'
+}
+
+describe('PostCard', () => {
+  it('renderiza el título y contenido correctamente', () => {
+    const { getByText } = render(PostCard, {
+      props: { post: mockPost }
+    })
+
+    expect(getByText('Post de prueba')).toBeInTheDocument()
+    expect(getByText(/Contenido simulado/)).toBeInTheDocument()
+  })
+})
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## 🧠 Buenas prácticas implementadas
+
+- Separación clara entre lógica (composables), UI (components) y vistas (pages).
+- Reutilización de código a través de composables (`usePosts`, `usePost`).
+- Mapeo de tipos con TypeScript para mayor robustez.
+- Estilos simples, organizados por componente (`<style scoped>`).
+- Pruebas unitarias con mocks para evitar llamadas reales a la API.
+- Uso de rutas dinámicas (`[id].vue`) para detalle de publicaciones.
+
+---
+
+## 🔗 Recursos externos usados
+
+- [JSONPlaceholder API](https://jsonplaceholder.typicode.com/)
+- [Nuxt 3 Docs](https://nuxt.com/docs)
+- [Vitest Docs](https://vitest.dev/)
+
+---
+
+## 🧑‍💻 Autor
+
+**Jeisson Pulido**  
+[GitHub](https://github.com/Jeisson30) · Bogotá, Colombia
+
+---
+
+## 📄 Licencia
+
+MIT - Desarrollo para conocimiento y muestra de conceptos solicitados.
