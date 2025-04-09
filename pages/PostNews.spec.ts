@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/vue'
-import PostNews from '@/pages/PostNews.vue'
+import PostNews from '../pages/PostNews.vue'
 import { describe, it, expect, vi } from 'vitest'
 
-vi.mock('@/composables/usePosts', () => {
+vi.mock('../composables/usePosts', () => {
   return {
     usePosts: () => ({
       posts: [

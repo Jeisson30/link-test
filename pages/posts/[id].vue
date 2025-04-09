@@ -1,21 +1,24 @@
 <template>
-    <div v-if="isLoading" class="loading">Cargando post...</div>
-    <div v-else-if="error" class="error">{{ error }}</div>
-    <div v-else class="post-detail">
-      <h1>{{ post?.title }}</h1>
-      <p>{{ post?.body }}</p>
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { useRoute } from 'vue-router'
-  import { usePost } from '@/composables/usePost'
-  
-  const route = useRoute()
-  const { post, isLoading, error, fetchPost } = usePost()
-  
-  await fetchPost(Number(route.params.id))
-  </script>
+  <div v-if="isLoading" class="loading">Cargando post...</div>
+  <div v-else-if="error" class="error">{{ error }}</div>
+  <div v-else class="post-detail">
+    <h1>{{ post?.title }}</h1>
+    <p>{{ post?.body }}</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePost } from '../../composables/usePost'
+
+const route = useRoute()
+const { post, isLoading, error, fetchPost } = usePost()
+
+onMounted(() => {
+  fetchPost(Number(route.params.id))
+})
+</script>
   
   <style scoped>
   .post-detail {
