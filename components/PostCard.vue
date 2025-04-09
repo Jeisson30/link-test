@@ -6,7 +6,7 @@
   </template>
   
   <script setup lang="ts">
-  import type { Post } from '@/types/Post'
+  import type { Post } from '../types/Post'
   import { useRouter } from 'vue-router'
   
   const props = defineProps<{ post: Post }>()
